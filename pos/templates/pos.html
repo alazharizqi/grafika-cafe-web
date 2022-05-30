@@ -33,10 +33,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Point of Sales</a>
+                <a class="nav-link active" aria-current="page" href="#">Sales</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'sales' %}">Sales</a>
+                <a class="nav-link" aria-current="page" href="{% url 'salesreport' %}">Sales Report</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
@@ -53,89 +53,31 @@
         <div class="row justify-content-center">
           <div class="col-md">
 
-            <h3>Add Menu</h3>
+            <h3>Add Transaction</h3>
 
-            <form action="">
-
-              <div class="row">
-
-                <div class="col-md">
-                  <label for="">Select Menu</label> <br>
-                  <select class="form-select" name="" id="">
-                    <option value="" disabled selected>Menu</option>
-
-                    {% for menu in menu %}
-                    <option value=""> {{menu.kode}} - {{menu.menu}} </option>
-                  {% endfor %}
-                  </select>
-                </div>
-
-                <div class="col-md">
-                  <label for="">Quantity</label>
-                  <input type="number" class="form-control" min="0" value="1">
-                </div>
-
-                <div class="col-md-3"> <br>
-                  <button class="btn btn-primary">Add Menu</button>
-                </div>
-
-              </div> <br>
-
-              <div class="row justify-content-center">
-
-                <div class="col-md-8">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Code</th>
-                        <th scope="col">Menu</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Qty</th>
-                        <th scope="col">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                  </table>
-                </div>
-  
-                <div class="col-md-4 border">
-                  <h3 class="text-center">Check Out</h3> <br>
-
-                  <dl>
-                    <dt class="h3 fw-bold">Table Number</dt>
-                    <dd>
-                        <input type="number" class="form-control form-control-lg rounded-0 text-end" step="any" min="0" value="0">
-                    </dd>
-                    <dt class="h3 fw-bold">Sub Total</dt>
-                    <dd class="text-end py-1 px-2 rounded-0 bg-light">
-                        <input type="hidden" name="sub_total" value="0">
-                        <span class="h3 fw-bold" id="sub_total">0.00</span>
-                    </dd>
-                    <dt class="h3 fw-bold">Others</dt>
-                    <dd>
-                        <input type="number" class="form-control form-control-lg rounded-0 text-end" step="any" min="0" value="0">
-                    </dd>
-                    <dt class="h3 fw-bold">Grand Total</dt>
-                    <dd class="text-end py-1 px-2 rounded-0 bg-light">
-                        <input type="hidden" name="grand_total" value="0">
-                        <input type="hidden" name="tendered_amount" value="0">
-                        <input type="hidden" name="amount_change" value="0">
-                        <input type="hidden" name="grand_total" value="0">
-                        <input type="hidden" name="grand_total" value="0">
-                        <span class="h3 fw-bold" id="grand_total">0.00</span>
-                    </dd>
-                </dl>
-
-                  <div class="col-md"> <br>
-                    <button class="btn btn-primary">Check Out</button>
-                  </div> <br>
-                </div>
-
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label class="form-label">Customer</label>
+                {{ form.customer }}
               </div>
-
+              <div class="mb-3">
+                <label class="form-label">Table Number</label>
+                {{ form.no_meja }}
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Menu</label>
+                {{form.menu}}
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Qty</label>
+                {{ form.qty }}
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Total</label>
+                {{ form.total }}
+              </div>
+              <button type="submit" class="btn btn-primary">Pay</button> <br><br>
             </form>
 
           </div>

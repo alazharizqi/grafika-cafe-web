@@ -1,10 +1,14 @@
+import datetime
 from django.shortcuts import redirect, render
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+from log.models import *
 
 # Create your views here.
+
+date = datetime.datetime.now()
 
 @login_required(login_url='login')
 def admin(request):
@@ -23,6 +27,8 @@ def adduser(request):
 
         User.objects.create(
             username=username, email=email, password=password, role=role)
+        Log.objects.create(user=request.user, activity="Add user" , date=date)
+        messages.success(request, 'Add user')
 
         return redirect('admin')
     
@@ -39,6 +45,8 @@ def deleteuser(request, pk):
     user = User.objects.get(id=pk)
     if request.method =='POST':
         user.delete()
+        Log.objects.create(user=request.user, activity="Delete user" , date=date)
+        messages.success(request, 'Delete user')
         return redirect('admin')
     context = {'user':user}
     return render(request, 'deleteuser.html', context)
@@ -64,7 +72,14 @@ def updateuser(request, id):
         userr.password = hash_password
         userr.role = role
         userr.save()
+        Log.objects.create(user=request.user, activity="Update user" , date=date)
+        messages.success(request, 'Update user')
 
         return redirect('admin')
 
     return render(request, 'updateuser.html', context)
+
+def logadmin(request):
+    log = Log.objects.all()
+    context = {'log' : log}
+    return render(request, 'logadmin.html', context)

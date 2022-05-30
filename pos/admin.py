@@ -12,4 +12,3 @@ from .models import *
 #     list_display = ('sales_id')
 
 admin.site.register(Sales)
-admin.site.register(SalesItem)

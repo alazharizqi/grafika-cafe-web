@@ -25,6 +25,9 @@ class Menu(models.Model):
 
     status = models.CharField(max_length=200, default='Tersedia', choices=statuss, null=True, blank=True)
 
+    def __str__(self):
+        return "{}".format(self.menu)
+
     def save(self, *args, **kwargs):
         super(Menu, self).save(*args, **kwargs)
         super().save()

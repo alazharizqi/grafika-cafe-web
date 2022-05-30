@@ -30,10 +30,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'pos' %}">Point of Sales</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'sales' %}">Sales</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Sales</a>
+                    <a class="nav-link active" aria-current="page" href="#">Sales Report</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
@@ -49,26 +49,28 @@
           <div class="row justify-content-center">
             <div class="col-md">
 
-              <h3>Sales</h3>
+              <h3>Sales Report</h3>
 
               <table class="table table-striped">
                 <thead>
                   <tr>
+                    <th scope="col">Transaction Code</th>
+                    <th scope="col">Customer</th>
                     <th scope="col">Table Number</th>
-                    <th scope="col">Sales Code</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Menu</th>
+                    <th scope="col">Qty</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Print</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                  {% for sales in sales %}
-                    <td>{{sales.no_meja}}</td>
-                    <td>{{sales.trans_code}}</td>
-                    <td>{{sales.date_add}}</td>
-                    <td>Rp{{sales.grand_total}}</td>
-                    <td><a href="#" class="btn btn-primary">Print</a></td>
+                  {% for salesreport in salesreport %}
+                    <td>{{salesreport.slug}}</td>
+                    <td>{{salesreport.customer}}</td>
+                    <td>{{salesreport.no_meja}}</td>
+                    <td>{{salesreport.menu}}</td>
+                    <td>{{salesreport.qty}}</td>
+                    <td>Rp{{salesreport.total}}</td>
                   </tr>
                   {% endfor %}
                     

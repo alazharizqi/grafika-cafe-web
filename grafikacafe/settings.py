@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'menu',
     'pos',
     'adminpage',
+    'log',
 ]
 
 MIDDLEWARE = [

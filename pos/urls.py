@@ -3,6 +3,6 @@ from django.urls.resolvers import URLPattern
 from . import views
 
 urlpatterns = [
-    path('', views.pos, name='pos'),
-    path('sales/', views.sales, name='sales'),
+    path('', views.sales, name='sales'),
+    path('sales report/', views.salesreport, name='salesreport'),
 ]
